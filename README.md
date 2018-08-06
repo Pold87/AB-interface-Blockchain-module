@@ -1,31 +1,5 @@
 # Ethereum Docker
 
-Get started creating Ethereum development and test single and multi-node clusters
-rapidly using Docker.
-
-We provide full Ethereum test nodes (using the [Ethereum Go client](https://github.com/ethereum/go-ethereum) with all APIs enabled by default as well as a monitoring dashboard (for the cluster version) provided
-via [Netstats](https://github.com/cubedro/eth-netstats).
-
-#### Alternative projects
-
-TestRPC - [https://github.com/ethereumjs/testrpc](https://github.com/ethereumjs/testrpc)
-
-# Getting started
-
-## 1. Installing
-
-### 1.1. Standalone Ethereum node
-
-#### Prerequisites
-
-Docker Toolbox installed. 
-> To download and install Docker Toolbox for your environment please
-follow [the Docker Toolbox instructions](https://www.docker.com/products/docker-toolbox). 
-
-After Docker Toolbox has been installed, create a ```default``` machine to run Docker against.
-
-#### Lets go
-
 To run a single test Ethereum node run the following:
 
 ```
@@ -40,7 +14,7 @@ open http://$(docker-machine ip default):8545
 
 Assuming you ran docker-compose against the ```default``` machine.
 
-### 1.2. Ethereum Cluster with netstats monitoring
+### Ethereum Cluster with netstats monitoring
 
 To run an Ethereum Docker cluster run the following:
 
@@ -72,7 +46,7 @@ This will scale the number of Ethereum nodes **upwards** (replace 3 with however
 you prefer). These nodes will connect to the P2P network (via the bootstrap node)
 by default.
 
-### 1.3. Test accounts ready for use
+### Test accounts ready for use
 
 As part of the bootstrapping process we bootstrap 10 Ethereum accounts for use
 pre-filled with 20 Ether for use in transactions by default.
@@ -80,7 +54,7 @@ pre-filled with 20 Ether for use in transactions by default.
 If you want to change the amount of Ether for those accounts
 See `files/genesis.json`.
 
-## 2. Interact with geth
+## Interact with geth
 
 To get attached to the `geth` JavaScript console on the node you can run the following
 ```
@@ -90,7 +64,7 @@ Then you can `miner.start()`, and then check to see if it's mining by inspecting
 
 See the [Javascript Runtime](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) docs for more.
 
-### 2.1 Use an existing DAG
+### Use an existing DAG
 
 To speed up the process, you can use a [pre-generated DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG). All you need to do is add something like this
 ```
