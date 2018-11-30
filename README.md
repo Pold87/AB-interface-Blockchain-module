@@ -1,10 +1,12 @@
+# Imporant advice and TODOs
+
+- Some functions, like addPeer do not work in web3 -> use the command line interface therefore
+- There was a faulty solc version that caused many problems; the right version to install is solc@0.4.25: `npm install solc@0.4.25 --unsafe`
+- You also need to install web3 via npm; there's a problem installing it from the Dockerfile. The problem is related to the user in docker; I think I had a solution but may have lost it.
+- The Ethereum processes should be started outside of ARGoS: this way we can save time and other simulators can be used in a plug and play way
+- The interface could be written in javascript (node) or bash; the advantage of bash is speed and ease of use; the advantage of javascript is that return values can be directly used;
+
 # Ethereum Docker
-
-To run a single test Ethereum node run the following:
-
-```
-$ docker-compose -f docker-compose-standalone.yml up -d
-```
 
 If using docker-machine you should be able to get to the JSON RPC client by doing:
 
@@ -39,7 +41,7 @@ open http://$(docker-machine ip default):3000
 You can scale the number of Ethereum nodes by running:
 
 ```
-docker-compose scale eth=3
+docker-compose up -d --scale eth=3
 ```
 
 This will scale the number of Ethereum nodes **upwards** (replace 3 with however many nodes
