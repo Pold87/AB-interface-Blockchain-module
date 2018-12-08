@@ -1,1 +1,0 @@
-var cC = web3.eth.contract(INTERFACE);var c = cC.at("ADDRESS");c.FUNC("ARG",{value: VALUE, from: eth.coinbase, gas: '3000000'});
