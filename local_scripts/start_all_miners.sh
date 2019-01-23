@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# TODO: This can be done via docker-compose!
 # Start mining
+
 
 N=20
 

@@ -15,7 +15,8 @@ RUN cd /root &&\
     npm install solc@0.4.25 --unsafe &&\
     npm install web3 --unsafe
 
-COPY ./remote_scripts /root/
+COPY ./templates/ /root/templates/
+COPY ./scripts /root/
 #COPY ./files /root/files 
 RUN chmod +x /root/start.sh
 ADD app.json /root/eth-net-intelligence-api/app.json

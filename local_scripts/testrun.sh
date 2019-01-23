@@ -2,7 +2,7 @@
 # can use it independently of ARgoS and start the experiments after the
 # initialization phase has started
 
-N=2
+N=4
 DOCKERFOLDER="/home/volker/Documents/mygithub-software/ethereum-docker/"
 # Start Ethereum network using Docker 
 
@@ -10,17 +10,17 @@ cd ${DOCKERFOLDER} && sudo docker-compose down
 cd ${DOCKERFOLDER} && sudo docker-compose up -d --scale eth=$N
 
 # Wait until everything is initialized
-# TODO: find the right amoung of time 
+# TODO: find the right amount of time 
 # TODO: replace with something better (signal that is fired as soon as geth is initialized)
 sleep 10
 
 CONTRACTBASE="smart_contract_threshold"
 
-# Unlock account 
-sudo docker exec -it bootstrap bash /root/exec_cmd.sh 'loadScript("/root/unlockAccount.txt")'
+# Unlock account of bootstrap node
+#sudo docker exec -it bootstrap bash /root/exec_cmd.sh 'loadScript("/root/unlockAccount.txt")'
 
-# Start mining
-sudo docker exec -it bootstrap bash /root/exec_cmd.sh "miner.start(1)"
+# Start mining on bootstrap node
+#sudo docker exec -it bootstrap bash /root/exec_cmd.sh "miner.start(1)"
 
 # Deploy contract and get contract address
 sudo docker exec -it bootstrap node /root/mydeploy.js
