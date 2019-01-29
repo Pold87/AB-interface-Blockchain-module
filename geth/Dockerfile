@@ -17,11 +17,7 @@ RUN cd /root &&\
 
 COPY ./templates/ /root/templates/
 COPY ./scripts /root/
-#COPY ./files /root/files 
 RUN chmod +x /root/start.sh
 ADD app.json /root/eth-net-intelligence-api/app.json
-
-# Use this line to save time (i.e., you don't need to create the DAG)
-#ADD dag/full-R23-0000000000000000 /root/.ethash/full-R23-0000000000000000
 
 ENTRYPOINT /root/start.sh
