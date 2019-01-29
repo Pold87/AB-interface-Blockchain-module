@@ -1,0 +1,1 @@
+personal.unlockAccount(eth.coinbase, "", 0)
