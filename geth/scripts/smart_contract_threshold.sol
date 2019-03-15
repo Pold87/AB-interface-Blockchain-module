@@ -80,6 +80,7 @@ function askForPayout() public {
 
     /*     while (j > 0 && ripedVotes[j-1].diff > vi.diff) { */
     /*         ripedVotes[j] = ripedVotes[j - 1]; */
+
     /*         j -= 1; */
     /*     } */
     /*     ripedVotes[j] = vi; */

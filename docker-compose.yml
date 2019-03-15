@@ -21,10 +21,10 @@ services:
     image: mygeth:latest
     deploy:
       #replicas: 20
-#      resources:
-#        limits:
-#          cpus: '0.10'
-#          memory: 512M
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
     entrypoint: /root/start.sh
     volumes:
       - ./geth/files/password:/root/files/password:ro
