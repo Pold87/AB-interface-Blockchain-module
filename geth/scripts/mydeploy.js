@@ -8,34 +8,21 @@ async function deploy() {
     let password = '';
     let code = fs.readFileSync('/root/smart_contract_threshold.sol').toString();
     let compiledCode = solc.compile(code);
-    let abi = JSON.parse(compiledCode.contracts[':Estimation'].interface);    
+    let abi = JSON.parse(compiledCode.contracts[':Estimation'].interface);
     fs.writeFileSync("/root/deployed_contract/contractABI.abi", compiledCode.contracts[':Estimation'].interface);
     let bytecode = compiledCode.contracts[':Estimation'].bytecode;
     fs.writeFileSync("/root/deployed_contract/contractData.bin", bytecode);
-    let votingContract = new web3.eth.Contract(abi, {from: accounts[0], gas: 47000, data: '0x' + bytecode});
-
-    let contractInstance = await votingContract.deploy({})
-    .send({
-        from: accounts[0],
-        gas: 1500000
-    }, (err, txHash) => {
-        console.log('send:', err, txHash);
-    })
-    .on('error', (err) => {
-        console.log('error:', err);
-    })
-    .on('transactionHash', (err) => {
-        console.log('transactionHash:', err);
-    })
-    .on('receipt', (receipt) => {
-        console.log('receipt:', receipt);
-        votingContract.options.address = receipt.contractAddress;
-        fs.writeFile("/root/deployed_contract/contractAddress.txt", receipt.contractAddress);
+    const myContract = new web3.eth.Contract(abi);
+    let transactionConfig = {from: accounts[0], gas: 1500000, gasPrice: '1'}
+    myContract.deploy({data: '0x' + bytecode}).send(transactionConfig).then((readyContract)=> {
+    console.log(readyContract.address);
+    fs.writeFileSync("/root/deployed_contract/contractAddress.txt", readyContract.address);
+    }).catch(error => {
+       console.log(error)
     });
-
-    console.log('contractInstance.options:', contractInstance.options);
 }
 
 deploy()
 .then(() => console.log('Success'))
 .catch(err => console.log('Script failed:', err));
+

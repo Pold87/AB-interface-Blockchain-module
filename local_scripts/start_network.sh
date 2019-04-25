@@ -3,33 +3,31 @@
 # initialization phase has started
 
 N=$1
-DOCKERFOLDER="/home/volker/Documents/mygithub-software/ethereum-docker/"
+DOCKERFOLDER="/home/vstrobel/Documents/docker-geth-network/"
 # Start Ethereum network using Docker 
 
-#cd ${DOCKERFOLDER} && docker-compose down
-#cd ${DOCKERFOLDER} && docker-compose up -d --scale eth=$N
-
 cd ${DOCKERFOLDER}
-docker swarm leave --force
-docker swarm init
 docker stack rm ethereum
 sleep 20
 docker stack deploy -c ./docker-compose.yml ethereum
 docker service scale ethereum_eth=$N
 
-# Wait until everything is initialized
-# TODO: find the right amount of time 
-# TODO: replace with something better (signal that is fired as soon as geth is initialized)
+rm ${DOCKERFOLDER}/geth/shared/*
+rm ${DOCKERFOLDER}/geth/deployed_contract/*
+
 sleep 20
+docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) bash /root/exec_template.sh "/root/templates/unlockAccount.txt"
 
 # Start mining on bootstrap node
-docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) bash /root/exec_cmd.sh "miner.start(1)"
 
+docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) bash /root/exec_cmd.sh "miner.start(1)"
 CONTRACTBASE="smart_contract_threshold"
+
+sleep 20
 
 # Deploy contract and get contract address
 docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) node /root/mydeploy.js
 
-sleep 2
+#sleep 2
 #docker-compose stop bootstrap
-docker service update --replicas 0 ethereum_bootstrap
+#docker service update --replicas 0 ethereum_bootstrap
