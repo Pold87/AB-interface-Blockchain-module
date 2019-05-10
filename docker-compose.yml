@@ -28,15 +28,15 @@ services:
       #replicas: 20
       resources:
         limits:
-          cpus: '1.0'
-          memory: 1024M
+          cpus: '1.2'
+          memory: 1200M
     entrypoint: /root/start.sh
     depends_on:
      - bootstrap
     volumes:
       - ./geth/files/password:/root/files/password:ro
       - ./geth/deployed_contract/:/root/deployed_contract/:ro
-      - ./geth/shared:/root/shared/:rw
+      - ./geth/shared:/root/shared/:ro
       - ./geth/files/genesis.json:/root/files/genesis.json:ro
       - ./geth/files/keystore:/root/.ethereum/devchain/keystore:rw      
       - ./geth/dag/full-R23-0000000000000000:/root/.ethash/full-R23-0000000000000000:ro

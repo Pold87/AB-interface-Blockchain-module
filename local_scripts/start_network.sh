@@ -8,14 +8,14 @@ DOCKERFOLDER="/home/vstrobel/Documents/docker-geth-network/"
 
 cd ${DOCKERFOLDER}
 docker stack rm ethereum
-sleep 20
+
+rm -f ${DOCKERFOLDER}/geth/shared/my_enode.enode
+rm -f ${DOCKERFOLDER}/geth/deployed_contract/*
+
 docker stack deploy -c ./docker-compose.yml ethereum
 docker service scale ethereum_eth=$N
 
-rm ${DOCKERFOLDER}/geth/shared/*
-rm ${DOCKERFOLDER}/geth/deployed_contract/*
-
-sleep 20
+sleep 7
 docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) bash /root/exec_template.sh "/root/templates/unlockAccount.txt"
 
 # Start mining on bootstrap node
@@ -23,11 +23,7 @@ docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) bash /root/exec_tem
 docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) bash /root/exec_cmd.sh "miner.start(1)"
 CONTRACTBASE="smart_contract_threshold"
 
-sleep 20
+sleep 7
 
 # Deploy contract and get contract address
 docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) node /root/mydeploy.js
-
-#sleep 2
-#docker-compose stop bootstrap
-#docker service update --replicas 0 ethereum_bootstrap

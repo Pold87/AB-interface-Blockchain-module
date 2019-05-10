@@ -6,7 +6,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 async function deploy() {
     let accounts = await web3.eth.getAccounts();
     let password = '';
-    let code = fs.readFileSync('/root/smart_contract_threshold.sol').toString();
+    let code = fs.readFileSync('/root/shared/smart_contract_threshold.sol').toString();
     let compiledCode = solc.compile(code);
     let abi = JSON.parse(compiledCode.contracts[':Estimation'].interface);
     fs.writeFileSync("/root/deployed_contract/contractABI.abi", compiledCode.contracts[':Estimation'].interface);
