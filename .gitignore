@@ -2,7 +2,7 @@
 .DS_Store
 **/.DS_Store
 *~
-geth/dag/
+dag/
 #geth/files/keystore/
 
 
