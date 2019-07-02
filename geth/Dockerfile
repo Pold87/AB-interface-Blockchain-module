@@ -1,4 +1,4 @@
-FROM ethereum/client-go
+FROM ethereum/client-go:release-1.8
 MAINTAINER Volker Strobel <volker.strobel87@gmail.com>			
 
 USER root
@@ -15,8 +15,9 @@ RUN cd /root &&\
     npm install solc@0.4.25 --unsafe &&\
     npm install web3@1.0.0-beta.48 --unsafe
 
-COPY ./templates/ /root/templates/
 COPY ./scripts /root/
+COPY ./files/password /root/files/password
+COPY ./templates /root/
 RUN chmod +x /root/start.sh
 RUN chmod +x /root/start_bootstrap.sh
 ADD app.json /root/eth-net-intelligence-api/app.json

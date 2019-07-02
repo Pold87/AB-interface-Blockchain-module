@@ -9,15 +9,16 @@ services:
           memory: 2024M   
     hostname: bootstrap
     entrypoint: /root/start_bootstrap.sh
-    command: '--datadir=~/.ethereum/devchain --allow-insecure-unlock --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3,admin" --rpccorsdomain="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0"'
+    command: '--datadir=~/.ethereum/devchain --verbosity 2 --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3,admin" --rpccorsdomain="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0"'
     volumes:
       - ./geth/files/password:/root/files/password:ro
       - ./geth/deployed_contract:/root/deployed_contract/:rw
       - ./geth/shared:/root/shared/:rw
+      - ./geth/templates/:/root/templates/:ro
       - ./geth/files/genesis.json:/root/files/genesis.json:ro
       - ./geth/files/keystore:/root/.ethereum/devchain/keystore:rw     
-      - ./geth/dag/full-R23-0000000000000000:/root/.ethash/full-R23-0000000000000000:ro
-      - ./geth/dag/full-R23-290decd9548b62a8:/root/.ethash/full-R23-290decd9548b62a8:ro
+      - ./dag/full-R23-0000000000000000:/root/.ethash/full-R23-0000000000000000:ro
+      - ./dag/full-R23-290decd9548b62a8:/root/.ethash/full-R23-290decd9548b62a8:ro
     ports:
       - "30303:30303"
       - "30303:30303/udp"
@@ -28,8 +29,8 @@ services:
       #replicas: 20
       resources:
         limits:
-          cpus: '1.2'
-          memory: 1200M
+          cpus: '3.0'
+          memory: 1800M
     entrypoint: /root/start.sh
     depends_on:
      - bootstrap
@@ -37,8 +38,10 @@ services:
       - ./geth/files/password:/root/files/password:ro
       - ./geth/deployed_contract/:/root/deployed_contract/:ro
       - ./geth/shared:/root/shared/:ro
+      - ./geth/templates/:/root/templates/:ro
       - ./geth/files/genesis.json:/root/files/genesis.json:ro
-      - ./geth/files/keystore:/root/.ethereum/devchain/keystore:rw      
-      - ./geth/dag/full-R23-0000000000000000:/root/.ethash/full-R23-0000000000000000:ro
-      - ./geth/dag/full-R23-290decd9548b62a8:/root/.ethash/full-R23-290decd9548b62a8:ro
-    command: '--datadir=~/.ethereum/devchain --allow-insecure-unlock --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@XXX:30303" --rpcapi "db,personal,eth,net,web3,admin" --rpccorsdomain="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0" '
+    #  - ./geth/files/keystore:/root/.ethereum/devchain/keystore:rw      
+      - ./dag/full-R23-0000000000000000:/root/.ethash/full-R23-0000000000000000:ro
+      - ./dag/full-R23-290decd9548b62a8:/root/.ethash/full-R23-290decd9548b62a8:ro
+# If I get an error with later versions of geth, add the allow-insecure-unlock flag again
+    command: '--datadir=~/.ethereum/devchain --verbosity 2 --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@XXX:30303" --rpcapi "db,personal,eth,net,web3,admin" --rpccorsdomain="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0" '
