@@ -101,6 +101,7 @@ function askForPayout() public {
     delete robotsToPay;
 
     // Determine consensus
+    // TODO: Make sure that consensusReached cannot become 1 again after it was 2 already
     if ((abs(oldMean - mean) < epsilon) && localCount > 39) {
       consensusReached(2);
     } else {
