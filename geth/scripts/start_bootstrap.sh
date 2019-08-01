@@ -7,11 +7,11 @@ set -e
 ip=`hostname -i`
 echo $ip > /root/shared/my_enode.enode
 geth --datadir=~/.ethereum/devchain init "/root/files/genesis.json"
-sleep 3
+sleep 7
 BOOTSTRAP_IP=`getent hosts bootstrap | cut -d" " -f1`
 GETH_OPTS=${@/XXX/$BOOTSTRAP_IP}
 geth $GETH_OPTS&
-sleep 7
+sleep 5
 bash /root/get_enode.sh
 #cp /root/my_enode.enode /root/shared/my_enode.enode
 bash /root/exec_template.sh "/root/templates/unlockAccount.txt"
