@@ -4,7 +4,7 @@ contract Estimation {
 int public mean = 5000000;
 int public count = 0;
 int public threshold = 140000;
-int public roundthreshold = 2000000;
+int public roundthreshold = 20000000;
 int public m2;
 uint public ticketPrice = 40;
 int public round;
@@ -15,6 +15,7 @@ uint public weightCount = 0;
 uint public voteCount = 0;
 uint public outliers = 6;
 int public tau = TAU;
+uint public consensusReached = 0;
  
 int256 W_n = 0;
 
@@ -31,7 +32,6 @@ votingInformation[] allVotes;
 address[] public robotsToPay;
 mapping(address => int) public payoutForAddress;
 mapping(address => int256) public weights;
-event consensusReached(uint c);
 
 function abs(int x) internal pure returns (int y) {
     if (x < 0) {
@@ -101,11 +101,10 @@ function askForPayout() public {
     delete robotsToPay;
 
     // Determine consensus
-    // TODO: Make sure that consensusReached cannot become 1 again after it was 2 already
-    if ((abs(oldMean - mean) < tau) && localCount > 39) {
-      consensusReached(2);
+    if (consensusReached == 2 || ((abs(oldMean - mean) < tau) && localCount > 39)) {
+      consensusReached = 2;
     } else {
-      consensusReached(1);
+      consensusReached = 1;
     }
   }    
 }
