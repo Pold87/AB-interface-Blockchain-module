@@ -10,4 +10,5 @@ docker build -t mygeth .
 docker swarm init
 ```
 
-
+## Run
+To start experiments, you need the code in https://github.com/Pold87/robot-swarms-need-blockchain
