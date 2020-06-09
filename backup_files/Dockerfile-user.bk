@@ -1,0 +1,40 @@
+FROM ethereum/client-go
+
+RUN adduser --disabled-password --gecos "" ethuser
+
+
+
+RUN apk add --update git bash nodejs nodejs-npm perl python make g++ nano
+
+RUN cd /home/ethuser &&\
+    git clone https://github.com/cubedro/eth-net-intelligence-api &&\
+    cd eth-net-intelligence-api
+#RUN apt-get update
+#RUN apt-get install --yes --fix-missing software-properties-common
+#RUN add-apt-repository ppa:ethereum/ethereum
+#RUN apt-get update && apt-get install --yes --fix-missing ethereum solc
+
+ADD start.sh /home/ethuser/start.sh
+ADD app.json /home/ethuser/eth-net-intelligence-api/app.json
+ADD Voting.sol /home/ethuser/Voting.sol
+ADD query.js /home/ethuser/query.js
+Add deploy.js /home/ethuser/deploy.js
+
+RUN chmod +x /home/ethuser/start.sh
+
+
+USER ethuser
+WORKDIR /home/ethuser
+RUN npm install &&\
+    npm install pm2 --unsafe &&\
+    npm install web3 --unsafe &&\
+    npm install solc --unsafe 
+
+
+
+ENTRYPOINT /home/ethuser/start.sh
+
+# Use this line to save time (i.e., you don't need to create the DAG)
+#ADD dag/full-R23-0000000000000000 /root/.ethash/full-R23-0000000000000000
+
+

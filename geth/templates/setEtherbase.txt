@@ -1,0 +1,1 @@
+miner.setEtherbase(eth.accounts[0])
