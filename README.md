@@ -19,7 +19,7 @@ For debugging purposes or for creating your own private Ethereum
 network, you can also use this module without ARGoS. 
 
 ## Overview of the interface
-![Overview](img/interface?raw=true "Overview")
+![Overview](img/interface.png?raw=true "Overview")
 
 See `img/interface.png` for an overview of the interface.
 
