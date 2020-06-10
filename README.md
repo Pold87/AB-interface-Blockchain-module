@@ -23,6 +23,10 @@ network, you can also use this module without ARGoS.
 
 ## Setup
 
+The very first time you run this code, it is required to create the
+Docker image for the Ethereum nodes and initialize Docker Swarm as
+follows:
+
 ```
 cd geth/
 docker build -t mygeth .
