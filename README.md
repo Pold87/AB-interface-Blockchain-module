@@ -50,6 +50,12 @@ script can take take several minutes):
 bash local_scripts/create_dag.sh
 ```
 
+If you get an error in any of the stepts, try executing:
+
+```
+bash local_scripts/stop_network.sh
+```
+
 ## Run
 
 Usually, the network is created when a swarm robotics experiment is
