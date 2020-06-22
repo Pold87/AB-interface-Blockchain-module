@@ -42,12 +42,12 @@ repository is located on your computer, for example:
 ```
 
 In order to be able to mine, you need to create the [DAG
-datasets](https://eth.wiki/concepts/ethash/dag) as follows (the
-creates files require approximately 2 GB disk space and the execution of the script can take take several minutes):
+datasets](https://eth.wiki/concepts/ethash/dag) as follows (creating
+the files requires approximately 2 GB disk space and executing the
+script can take take several minutes):
 
 ```
-cd local_scripts/
-bash create_dag.sh
+bash local_scripts/create_dag.sh
 ```
 
 ## Run
