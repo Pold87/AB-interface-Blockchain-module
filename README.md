@@ -33,6 +33,23 @@ docker build -t mygeth .
 docker swarm init
 ```
 
+Additionally, you have to set the variable `DOCKERFOLDER` in
+the file `global_config.sh` to the full path where this
+repository is located on your computer, for example:
+
+```
+/Users/vstrobel/Documents/ARGoS-Blockchain-interface/
+```
+
+In order to be able to mine, you need to create the [DAG
+datasets](https://eth.wiki/concepts/ethash/dag) as follows (the
+creates files require approximately 2 GB disk space and the execution of the script can take take several minutes):
+
+```
+cd local_scripts/
+bash create_dag.sh
+```
+
 ## Run
 
 Usually, the network is created when a swarm robotics experiment is

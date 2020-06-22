@@ -1,9 +1,15 @@
 # This script should maybe be executed outside of C++ because then, we
-# can use it independently of ARgoS and start the experiments after the
+# can use it independently of ARGoS and start the experiments after the
 # initialization phase has started
 
+# Change to this script's folder
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+cd "$parent_path"
+
 N=$1
-DOCKERFOLDER="/home/vstrobel/Documents/docker-geth-network/"
+
+. ../global_config.sh
+
 # Start Ethereum network using Docker 
 
 cd ${DOCKERFOLDER}
@@ -21,7 +27,7 @@ docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) bash /root/exec_tem
 # Start mining on bootstrap node
 
 docker exec -it $(docker ps -q -f name=ethereum_bootstrap.1) bash /root/exec_cmd.sh "miner.start(1)"
-CONTRACTBASE="smart_contract_threshold"
+CONTRACTBASE="Estimation"
 
 sleep 7
 
