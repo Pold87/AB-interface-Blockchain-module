@@ -4,7 +4,7 @@ contract Estimation {
 int public mean = 5000000;
 int public count = 0;
 int public threshold = 140000;
-int public roundthreshold = 20000000;
+int public roundthreshold = 2000000;
 int public m2;
 uint public ticketPrice = 40;
 int public round;
@@ -14,7 +14,7 @@ uint public localCount = 0;
 uint public weightCount = 0;
 uint public voteCount = 0;
 uint public outliers = 6;
-int public tau = TAU;
+int public tau = 1000000;
 uint public consensusReached = 0;
  
 int256 W_n = 0;

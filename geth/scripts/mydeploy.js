@@ -15,8 +15,8 @@ async function deploy() {
     const myContract = new web3.eth.Contract(abi);
     let transactionConfig = {from: accounts[0], gas: 1500000, gasPrice: '1'}
     myContract.deploy({data: '0x' + bytecode}).send(transactionConfig).then((readyContract)=> {
-    console.log(readyContract.address);
-    fs.writeFileSync("/root/deployed_contract/contractAddress.txt", readyContract.address);
+    console.log(readyContract.options.address);
+    fs.writeFileSync("/root/deployed_contract/contractAddress.txt", readyContract.options.address);
     }).catch(error => {
        console.log(error)
     });
