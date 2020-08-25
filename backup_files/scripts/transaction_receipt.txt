@@ -1,1 +1,0 @@
-Fatal: Unable to attach to remote geth: dial unix /Users/volkerstrobel/.ethereum/devchain/geth.ipc: connect: no such file or directory

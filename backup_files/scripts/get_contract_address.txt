@@ -1,3 +1,0 @@
-txhash=$1
-geth --exec "eth.getTransactionReceipt(${txhash}).contractAddress"  attach ~/.ethereum/devchain/geth.ipc 
-
