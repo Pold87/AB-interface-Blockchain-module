@@ -6,9 +6,13 @@ BOOTSTRAP_IP=`cat /root/shared/my_enode.enode | tr -d '"'`
 GETH_OPTS=${@/XXX/$BOOTSTRAP_IP}
 echo "$GETH_OPTS"
 geth $GETH_OPTS&
-sleep 10
+sleep 13
 bash /root/exec_template.sh "/root/templates/createAccount.txt"
+sleep 1
 bash /root/exec_template.sh "/root/templates/setEtherbase.txt"
+sleep 1
 bash /root/get_enode.sh
+sleep 1
 bash /root/exec_template.sh "/root/templates/unlockAccount.txt"
+sleep 1
 tail -f /dev/null

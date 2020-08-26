@@ -6,7 +6,7 @@ int public count = 0;
 int public threshold = 140000;
 int public roundthreshold = 2000000;
 int public m2;
-uint public ticketPrice = 40;
+uint256256 public collectedEther = 0;
 int public round;
 int public numCurrentVotes = 0;
 int public NEEDEDVOTES = 20;
@@ -91,9 +91,8 @@ function askForPayout() public {
 
     // Reimburse robots
 
-    uint payoutFactor = allVotes.length / robotsToPay.length;
     for (uint b = 0; b < robotsToPay.length; b++) {
-      robotsToPay[b].transfer((ticketPrice - 1) * 1 ether * payoutFactor);
+      robotsToPay[b].transfer((collectedEther - 10000000000)  / robotsToPay.length);
     }
 
     round = round + 1;
@@ -115,10 +114,19 @@ function getSenderBalance() public view returns (uint) {
 
  function vote(int x_n) public payable {
 
-   if (msg.value < ticketPrice * 1 ether) {
+   // Determine ticket price
+
+   int256 delta = x_n - mean;    
+   int256 absDelta = abs(delta);
+   uint256 realDelta = uint256(absDelta);      
+   uint256 ticketPrice = realDelta * realDelta * 10000000;           
+
+   if (round != 0 && msg.value < ticketPrice) {   
        revert();
    }
 
+   collectedEther = collectedEther + msg.value;
+   
    askForPayout();
 
    int weight = int(msg.sender.balance);
