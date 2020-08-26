@@ -9,7 +9,7 @@ services:
           memory: 2024M   
     hostname: bootstrap
     entrypoint: /root/start_bootstrap.sh
-    command: '--datadir=~/.ethereum/devchain --verbosity 2 --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3,admin" --rpccorsdomain="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0"'
+    command: '--datadir=~/.ethereum/devchain --verbosity 2 --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3,admin" --rpccorsdomain="*" --networkid=456719 --rpc --rpcport "8545" --rpcaddr "0.0.0.0"'
     volumes:
       - ./geth/files/password:/root/files/password:ro
       - ./geth/deployed_contract:/root/deployed_contract/:rw
@@ -22,6 +22,7 @@ services:
       - "30303:30303"
       - "30303:30303/udp"
       - "8555:8555"
+      - "8545:8545"
   eth:
     image: mygeth:latest
     deploy:
