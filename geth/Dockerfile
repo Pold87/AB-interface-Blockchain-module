@@ -18,7 +18,7 @@ EXPOSE 8545 8546 8547 30303 30303/udp
 USER root
 WORKDIR /root/
 
-RUN apk add --no-cache --update git bash nodejs nodejs-npm perl python build-base
+RUN apk add --no-cache --update git bash nodejs nodejs-npm perl python3 build-base
 RUN  npm config set unsafe-perm true && npm install -g npm@next && npm config set unsafe-perm false
 RUN cd /root &&\
     #git clone https://github.com/cubedro/eth-net-intelligence-api &&\

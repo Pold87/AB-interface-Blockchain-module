@@ -2,21 +2,26 @@
 # can use it independently of ARGoS and start the experiments after the
 # initialization phase has started
 
+ARGOSFOLDER="/home/volker/Documents/mygithub-software/robot-swarms-need-blockchain"
+
 # Change to this script's folder
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 cd "$parent_path"
 
 N=$1
 
-. ../global_config.sh
+source ${ARGOSFOLDER}/global_config.sh
 
 # Start Ethereum network using Docker 
 
-cd ${DOCKERFOLDER}
+cd ${DOCKERBASE}
 docker stack rm ethereum
 
-rm -f ${DOCKERFOLDER}/geth/shared/my_enode.enode
-rm -f ${DOCKERFOLDER}/geth/deployed_contract/*
+echo "I am in this folder now:"
+echo `pwd`
+
+rm -f ${DOCKERBASE}/geth/shared/my_enode.enode
+rm -f ${DOCKERBASE}/geth/deployed_contract/*
 
 docker stack deploy -c ./docker-compose.yml ethereum
 docker service scale ethereum_eth=$N
