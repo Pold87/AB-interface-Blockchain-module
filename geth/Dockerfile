@@ -4,7 +4,7 @@ MAINTAINER Volker Strobel <volker.strobel87@gmail.com>
 
 RUN apk add --no-cache make gcc musl-dev linux-headers git
 
-ADD ./myowngeth /go-ethereum
+ADD ./custom-geth /go-ethereum
 RUN cd /go-ethereum && make geth
 
 # Pull Geth into a second stage deploy alpine container
