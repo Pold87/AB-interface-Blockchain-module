@@ -2,14 +2,13 @@
 # can use it independently of ARGoS and start the experiments after the
 # initialization phase has started
 
-ARGOSFOLDER="/home/volker/Documents/mygithub-software/robot-swarms-need-blockchain"
-
 # Change to this script's folder
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 cd "$parent_path"
 
 N=$1
 
+source global_config_blockchain.sh
 source ${ARGOSFOLDER}/global_config.sh
 
 # Start Ethereum network using Docker 
