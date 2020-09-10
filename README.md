@@ -1,6 +1,6 @@
-# ARGoS-Blockchain interface
+# ARGoS-Blockchain interface: Blockchain module (Module 1)
 
-This module allows for creating an Ethereum network with several
+This blockchain module allows for creating an Ethereum network with several
 nodes, where each node is located in a separate Docker container. For
 the ARGoS-Blockchain interface, the interaction with the Ethereum
 nodes is done via C++, using the code in the following repository:
