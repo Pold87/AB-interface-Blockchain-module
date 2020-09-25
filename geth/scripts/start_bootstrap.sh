@@ -6,7 +6,7 @@ set -e
 #sleep 3
 ip=`hostname -i`
 echo $ip > /root/shared/my_enode.enode
-geth --datadir=~/.ethereum/devchain init "/root/files/genesis.json"
+geth --datadir=~/.ethereum/devchain init "/root/files/genesis_poa.json"
 sleep 7
 BOOTSTRAP_IP=`getent hosts bootstrap | cut -d" " -f1`
 GETH_OPTS=${@/XXX/$BOOTSTRAP_IP}

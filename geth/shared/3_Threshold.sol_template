@@ -60,7 +60,7 @@ function getBlockNumber() public view returns (uint) {
 
 function askForPayout() public {
 
-  if (allVotes.length > 20) {
+  if (allVotes.length == 20) {
 
     address r;
 

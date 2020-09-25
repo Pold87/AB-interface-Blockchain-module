@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 sleep 12
-geth --datadir=~/.ethereum/devchain init "/root/files/genesis.json"
+geth --datadir=~/.ethereum/devchain init "/root/files/genesis_poa.json"
 BOOTSTRAP_IP=`cat /root/shared/my_enode.enode | tr -d '"'`
 GETH_OPTS=${@/XXX/$BOOTSTRAP_IP}
 echo "$GETH_OPTS"

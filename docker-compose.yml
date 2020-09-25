@@ -16,6 +16,7 @@ services:
       - ./geth/shared:/root/shared/:rw
       - ./geth/templates/:/root/templates/:ro
       - ./geth/files/genesis.json:/root/files/genesis.json:ro
+      - ./geth/files/genesis_poa.json:/root/files/genesis_poa.json:ro
       - ./geth/files/keystore:/root/.ethereum/devchain/keystore:rw     
 #      - ./dag/:/root/.ethash/:rw
     ports:
@@ -40,6 +41,7 @@ services:
       - ./geth/shared:/root/shared/:ro
       - ./geth/templates/:/root/templates/:ro
       - ./geth/files/genesis.json:/root/files/genesis.json:ro
+      - ./geth/files/genesis_poa.json:/root/files/genesis_poa.json:ro	
     #  - ./geth/files/keystore:/root/.ethereum/devchain/keystore:rw      
 #      - ./dag/:/root/.ethash/:ro
 # If I get an error with later versions of geth, add the allow-insecure-unlock flag again
